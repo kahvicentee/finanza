@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# FINANZA 💰
+Sistema Web para gerenciamento financeiro pessoal, permitindo o cadastro de usuários, autenticação segura e o controle de movimentações financeiras de forma simples e intuitiva.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+👩🏻‍💻 Desenvolvido por [Karina Vicente](https://github.com/kahvicentee) 
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📖 Sobre o Projeto
+O FINANZA nasceu com o objetivo de ajudar usuários a organizarem suas finanças pessoais através de uma interfacfe moderna e intuitiva.
 
-### `npm start`
+O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Full-Stack, incluindo criação de interfaces com React, desenvolvimento de APIs com Node.js e manipulação de bancos de dados relacioais com MySQL.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🔧 Tecnologias Utilizadas
 
-### `npm test`
+### Frontend
+* React.js
+* React Router DOM
+* Axios
+* SASS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend
+* Node.js
+* Express.js
+* JWT (Autenticação)
 
-### `npm run build`
+### Banco de Dados
+* MySQL
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Ferramentas
+* VS Code
+* Thunder Client
+* Git
+* GitHub
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚙️ Funcionalidades
+### Usuários
+- Cadastro e Login de usuários
+- Validação de formulário
+- Criptografia de senhas
+- Autenticação por token
 
-### `npm run eject`
+### Financeiro
+- Cadastro de movimentações
+- Listagem de movimentações
+- Controle de receitas e despesas
+- Cálculo automático de saldo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📸 Imagens do Projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📚 Aprendizados
 
-## Learn More
+Durante o desenvolvimento deste projeto foram praticados conceitos como:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Componentização com React;
+* Gerenciamento de estado com Hooks;
+* Consumo de APIs com Axios;
+* Rotas com React Router;
+* Criação de APIs REST;
+* Integração Frontend e Backend;
+* Modelagem de Banco de Dados;
+* Autenticação de usuários;
+* Tratamento de erros;
+* Versionamento com Git.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 📅 Diário de Desenvolvimento
+### Dia 1 
+* Estrutura inicial do projeto React;
+* Organização das rotas;
+* Criação das telas de Início, Login e Cadastro.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Dia 2 
+* Criação do banco de dados;
+* Desenvolvimento da API;
+* Implementação dos endpoints de usuários;
+* Integração entre Frontend e Backend.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Licença
+Este projeto foi desenvolvido para fins de estudo e prático de desenvolvimento Full-Stack.

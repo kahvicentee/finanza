@@ -1,0 +1,130 @@
+.pagina-cadastro {
+    min-height: 100vh;
+    background-color: var(--azul);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .formulario {
+        background-color: var(--preto);
+        color: var(--branco);
+        padding: 30px 35px;
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 600px;
+
+        .botao-voltar {
+            cursor: pointer;
+            width: 95px;
+            padding: 10px 5px;
+            background-color: var(--cinza);
+            color: var(--branco);
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            text-decoration: none;
+
+            .voltar {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                color: var(--branco);
+                text-decoration: none;
+            }
+        }
+
+        .titulo {
+            text-align: center;
+
+            h2 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 20px;
+            }
+        }
+
+        .campos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+
+            .campo {
+                p {
+                    margin: 3px 0px;
+                    font-size: 20px;
+                }
+
+                input {
+                    width: 100%;
+                    font-size: 16px;
+                    padding: 8px;
+                    outline: none;
+                    background-color: var(--preto);
+                    color: var(--branco);
+                    border: 1px var(--cinza) solid;
+                    border-radius: 5px;
+                }
+
+                .input-data {
+                    padding: 7px;
+                }
+
+                .input-data::-webkit-calendar-picker-indicator {
+                    filter: invert(1);
+                    cursor: pointer;
+                }
+
+                .msg-erro {
+                    font-size: 12px;
+                    color: var(--vermelho);
+                }
+            }
+
+            .campo.erro {
+                p {
+                    color: var(--vermelho);
+                }
+                input {
+                    border: 1px var(--vermelho) solid;
+                }
+            }
+        }
+
+        .botao {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            button {
+                cursor: pointer;
+                width: 100%;
+                font-size: 18px;
+                padding: 10px 0px;
+                border: none;
+                border-radius: 10px;
+                background-color: var(--azul);
+            }
+
+            p {
+                font-size: 18px;
+            }
+
+            label {
+                .ent {
+                    text-decoration: none;
+                    cursor: pointer;
+                    color: var(--verde);
+                }
+
+                .ent:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

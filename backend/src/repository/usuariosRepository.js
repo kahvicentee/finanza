@@ -25,6 +25,18 @@ export async function validarUsuario(usu) {
     return info[0]
 }
 
+export async function consultarUsuario(id) {
+    const comando = `
+        SELECT * FROM tb_usuarios
+            WHERE id_usuario = ?
+    `
+
+    let registro = await con.query(comando, [id])
+    let info = registro[0]
+
+    return info
+}
+
 export async function alterarUsuario(usu, id) {
     const comando = `
         UPDATE tb_usuarios

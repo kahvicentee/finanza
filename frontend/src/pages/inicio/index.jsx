@@ -12,7 +12,7 @@ export default function Inicio() {
                 <h2>Clareza para as suas finanças</h2>
                 <p>Organize receitas, despesas e metas financeiras em um só lugar. Tenha uma visão completa da sua vida financeira e tome decisões com mais segurança.</p>
                 <p>Pare de perder o controle dos seus gastos. Com a ajuda da Finanza, você acompanha suas finanças de forma simples, visual e eficente!</p>
-                <Link to='/login' className='botao'><button>Começar Agora</button></Link>
+                <Link to='/cadastro' className='botao'><button>Começar Agora</button></Link>
             </div>
 
             <div className='sobre'>

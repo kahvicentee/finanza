@@ -10,9 +10,3 @@ CREATE TABLE tb_usuarios (
     ds_senha			VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE tb_movimentacoes (
-    id_movimentacao     INT PRIMARY KEY AUTO_INCREMENT,
-
-    id_usuario          INT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario)
-)

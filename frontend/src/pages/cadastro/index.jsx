@@ -10,6 +10,7 @@ export default function Cadastro() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [confSenha, setConfSenha] = useState('')
+    const [carregando, setCarregando] = useState(false)
 
     const [nomeVazio, setNomeVazio] = useState(false)
     const [sobrenomeVazio, setSobrenomeVazio] = useState(false)
@@ -81,6 +82,7 @@ export default function Cadastro() {
     
     async function cadastrar() {
         if (!verificacao()) return
+        setCarregando(true)
 
         const paramCorpo = {
             "nome": nome,
@@ -104,6 +106,8 @@ export default function Cadastro() {
         } catch (error) {
             alert('Erro ao cadastrar novo usuário!')
             console.log(error)
+        } finally {
+            setCarregando(false)
         }
     }
 
@@ -118,7 +122,7 @@ export default function Cadastro() {
             <div className='formulario'>
                 <button className='botao-voltar'>          
                     <Link to="/" className='voltar'>
-                        <i className="fa-solid fa-arrow-left"></i>
+                        <i class="fa-solid fa-angle-left"></i>
                         Voltar
                     </Link>
                 </button>
@@ -234,7 +238,9 @@ export default function Cadastro() {
                 </div>
             
                 <div className='botao'>
-                    <button onClick={cadastrar}>Cadastrar</button>
+                    <button disabled={carregando} onClick={cadastrar}>
+                        {carregando ? 'Cadastrando...' : 'Cadastrar'}
+                    </button>
                     <p>Já possui uma conta? <label><Link to='/login' className='ent'>Entrar</Link></label> </p>
                 </div>
             </div>

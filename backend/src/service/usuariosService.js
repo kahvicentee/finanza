@@ -11,3 +11,17 @@ export async function validarUsuarioService(usu) {
 
     return registros
 }
+
+export async function consultarUsuarioService(id) {
+    let registro = await db.consultarUsuario(id)
+
+    return registro
+}
+
+export async function alterarUsuarioService(usu, id) {
+
+}
+
+export async function deletarUsuarioService(id) {
+
+}

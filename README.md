@@ -3,17 +3,12 @@ Sistema Web para gerenciamento financeiro pessoal, permitindo o cadastro de usu�
 
 👩🏻‍💻 Desenvolvido por [Karina Vicente](https://github.com/kahvicentee) 
 
----
-
 ## 📖 Sobre o Projeto
 O FINANZA nasceu com o objetivo de ajudar usuários a organizarem suas finanças pessoais através de uma interfacfe moderna e intuitiva.
 
 O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Full-Stack, incluindo criação de interfaces com React, desenvolvimento de APIs com Node.js e manipulação de bancos de dados relacioais com MySQL.
 
----
-
 ## 🔧 Tecnologias Utilizadas
-
 ### Frontend
 * React.js
 * React Router DOM
@@ -34,8 +29,6 @@ O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Fu
 * Git
 * GitHub
 
----
-
 ## ⚙️ Funcionalidades
 ### Usuários
 - Cadastro e Login de usuários
@@ -49,14 +42,9 @@ O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Fu
 - Controle de receitas e despesas
 - Cálculo automático de saldo
 
----
-
 ## 📸 Imagens do Projeto
 
----
-
 ## 📚 Aprendizados
-
 Durante o desenvolvimento deste projeto foram praticados conceitos como:
 
 * Componentização com React;
@@ -70,8 +58,6 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 * Tratamento de erros;
 * Versionamento com Git.
 
----
-
 ## 📅 Diário de Desenvolvimento
 ### Dia 1 
 * Estrutura inicial do projeto React;
@@ -84,7 +70,9 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 * Implementação dos endpoints de usuários;
 * Integração entre Frontend e Backend.
 
----
+### Dia 3
+* Criação das telas de Movimentação (Adicionar e Consultar);
+* Implementação dos endpoints das movimentações.
 
 ## Licença
-Este projeto foi desenvolvido para fins de estudo e prático de desenvolvimento Full-Stack.
+Este projeto foi desenvolvido para fins de estudo e prática de desenvolvimento Backend.

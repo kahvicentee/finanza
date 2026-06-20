@@ -6,6 +6,7 @@ import axios from 'axios'
 export default function Login() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+    const [carregando, setCarregando] = useState(false)
 
     const [emailVazio, setEmailVazio] = useState(false)
     const [senhaVazia, setSenhaVazia] = useState(false)
@@ -26,6 +27,7 @@ export default function Login() {
         }
 
         if (valido === false) return
+        setCarregando(true)
 
         try {
             if (email !== '' && senha !== '') {
@@ -49,6 +51,8 @@ export default function Login() {
             alert('Erro ')
             console.log(error)
             setNaoEncontrado(true)
+        } finally {
+            setCarregando(false)
         }
     }
 
@@ -63,7 +67,7 @@ export default function Login() {
             <div className='formulario'>
                 <button className='botao-voltar'>          
                     <Link to="/" className='voltar'>
-                        <i class="fa-solid fa-arrow-left"></i>
+                        <i class="fa-solid fa-angle-left"></i>
                         Voltar
                     </Link>
                 </button>
@@ -108,7 +112,9 @@ export default function Login() {
                 </div>
 
                 <div className='botao'>
-                    <Link><button onClick={entrar}>Entrar</button></Link>
+                    <button disabled={carregando} onClick={entrar}>
+                        {carregando ? 'Entrando...' : 'Entrar'}
+                    </button>
                     <p>Ainda não tem uma conta? <label><Link to='/cadastro' className='cad'>Cadastre-se</Link></label> </p>
                 </div>
             </div>

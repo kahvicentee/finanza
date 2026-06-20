@@ -18,7 +18,9 @@ endpoints.post('/usuario', async (req, resp) => {
             })
         }
     } catch (error) {
-        console.log(error)
+        resp.status(400).send({
+            erro: error.message
+        })
     }
 })
 
@@ -38,16 +40,45 @@ endpoints.post('/usuario/entrar', async (req, resp) => {
         }
         
     } catch (error) {
-        console.log(error)
+        resp.status(400).send({
+            erro: error.message
+        })
+    }
+})
+
+endpoints.get('/usuario/:id', async (req, resp) => {
+    try {
+        let id = req.params.id
+        let registro = await service.consultarUsuarioService(id)
+
+        resp.send(registro)
+    } catch (error) {
+        resp.status(400).send({
+            erro: error.message
+        })
     }
 })
 
 endpoints.put('/usuario/:id', async (req, resp) => {
-  
+    try {
+        let id = req.params.id
+        
+    } catch (error) {
+        resp.status(400).send({
+            erro: error.message
+        })
+    }
 })
 
 endpoints.delete('/usuario/:id', async (req, resp) => {
-
+    try {
+        let id = req.params.id
+        
+    } catch (error) {
+        resp.status(400).send({
+            erro: error.message
+        })
+    }
 })
 
 export default endpoints

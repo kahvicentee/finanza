@@ -22,6 +22,7 @@ export default function Cadastro() {
 
     const [emailInvalido, setEmailInvalido] = useState(false)
     const [dataInvalida, setDataInvalida] = useState(false)
+    const [senhaInvalida, setSenhaInvalida] = useState(false)
 
     const navigate = useNavigate()
 
@@ -52,9 +53,12 @@ export default function Cadastro() {
             setConfSenhaVazia(true)
             valido = false
         }
-
         if (senha.trim() !== confSenha.trim()) {
             setSenDif(true)
+            valido = false
+        }
+        if(senha.trim().length() < 6) {
+            setSenhaInvalida(true)
             valido = false
         }
 
@@ -214,6 +218,9 @@ export default function Cadastro() {
                         }
                         {
                             senDif && <p className='msg-erro'>Você digitou duas senhas diferentes!</p>
+                        }
+                        {
+                            senhaInvalida && <p className='msg-erro'>Precisa ter mais de 6 dígitos!</p>
                         }
                     </div>
 

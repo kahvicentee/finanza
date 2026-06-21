@@ -2,6 +2,7 @@ import './index.scss'
 import CabecalhoUsuario from '../../components/cabecalhoUsuario'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Usuario() {
     const navigate = useNavigate()
@@ -10,24 +11,59 @@ export default function Usuario() {
     const [sobrenome, setSobrenome] = useState('')
     const [nascimento, setNascimento] = useState('')
     const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
     const [novaSenha, setNovaSenha] = useState('')
 
-    async function buscarInfo() {
+    async function buscarInfo(token) {
+        const resp = await axios.get(
+            'http://localhost:5030/usuario',
+            { 
+                headers: {
+                    'x-access-token': token
+                }
+            }
+        )
 
+        setNome(resp.data.ds_nome)
+        setSobrenome(resp.data.ds_sobrenome)
+        setNascimento(resp.data.dt_nascimento.split('T')[0])
+        setEmail(resp.data.ds_email)
+        setSenha(resp.data.ds_senha)
     }
 
     async function alterarUsu() {
-        setAlterar(true)
-
-        const paramCorpo = {
-            "nome": nome,
-            "sobrenome": sobrenome,
-            "nascimento": nascimento,
-            "email": email,
-            "senha": novaSenha
+        if (!alterar) { 
+            setAlterar(true)
+            return
         }
 
-        let url = `http://localhost:5030/usuario`
+        try {
+            const paramCorpo = {
+                "nome": nome,
+                "sobrenome": sobrenome,
+                "nascimento": nascimento,
+                "email": email,
+            }
+
+            if (novaSenha.trim() !== '') {
+                paramCorpo.senha = novaSenha
+            }
+
+            const token = localStorage.getItem('USUARIO')
+            const resp = await axios.put(
+                'http://localhost:5030/usuario',
+                paramCorpo,
+                {
+                    headers: {
+                        'x-access-token': token
+                    }
+                }
+            )
+            
+            setAlterar(false)
+        } catch (error) {
+
+        }
     }
 
     useEffect(() => {
@@ -35,12 +71,19 @@ export default function Usuario() {
 
         if(!token) {
             navigate('/')
+        } else {
+            buscarInfo(token)
         }
     }, [navigate])
 
     return (
         <div className='pagina-usuario'>
             <CabecalhoUsuario />
+
+            <div className='ola'>
+                <h1>Informações do Usuário</h1>
+                <div className='linha'></div>
+            </div>
 
             <div className='dados'>
                 <div className='dado'>
@@ -88,7 +131,8 @@ export default function Usuario() {
                     <p>Senha:</p>
                     <input 
                         type="text" 
-                        disabled='true'
+                        disabled
+                        value={"*".repeat(senha.length)}
                     />
                 </div>
 
@@ -102,7 +146,16 @@ export default function Usuario() {
                     />
                 </div>
 
-                <button onClick={alterarUsu} className='botao'>{alterar ? 'Salvar Alterações' : 'Alterar'}</button>
+                <div className='botoes'>
+                    <button onClick={alterarUsu} className='botao'>
+                        {alterar ? 'Salvar Alterações' : 'Alterar'}
+                    </button>
+
+                    <button className='botao-apagar'>
+                        <i className='fa-regular fa-trash-can'></i>
+                        Apagar
+                    </button>
+                </div>
             </div>
         </div>
     )

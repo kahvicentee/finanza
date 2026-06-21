@@ -1,12 +1,12 @@
 import con from "./connection.js";
 
-export async function adicionarMovimentacao(mov) {
+export async function adicionarMovimentacao(mov, idUsuario) {
     const comando = `
         INSERT INTO tb_movimentacoes (ds_titulo, ds_descricao, ds_categoria, ds_tipo, vl_total, dt_movimentacao, id_usuario)
             VALUES (?, ?, ?, ?, ?, ?, ?)
     `
 
-    let registros = await con.query(comando, [mov.titulo, mov.descricao, mov.categoria, mov.tipo, mov.valor, mov.data, mov.usuario])
+    let registros = await con.query(comando, [mov.titulo, mov.descricao, mov.categoria, mov.tipo, mov.valor, mov.data, idUsuario])
     let info = registros[0]
 
     return info.insertId
@@ -45,4 +45,7 @@ export async function consultarMovimentacoesPorTitulo(idUsuario, tit) {
         SELECT * FROM tb_movimentacoes 
             WHERE id_usuario = ? AND ds_titulo = ?
     `
+
+    let registros = await con.query(comando, [idUsuario, tit])
+
 }

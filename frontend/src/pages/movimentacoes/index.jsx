@@ -16,6 +16,7 @@ export default function Movimentacoes() {
     const [tituloVazio, setTituloVazio] = useState(false)
     const [valorVazio, setValorVazio] = useState(false)
     const [dataVazia, setDataVazia] = useState(false)
+    const [adicionado, setAdicionado] = useState(false)
 
     const navigate = useNavigate()
 
@@ -53,7 +54,25 @@ export default function Movimentacoes() {
                 "valor": valor,
                 "data": data
             }
-            
+
+            const token = localStorage.getItem('USUARIO')
+            await axios.post(
+                'http://localhost:5030/movimentacao',
+                paramCorpo,
+                {
+                    headers: {
+                        'x-access-token': token
+                    }
+                }
+            )
+        
+            setAdicionado(true)
+            setTitulo('')
+            setDescricao('')
+            setValor('')
+            setData('')
+            setCategoria('Salário')
+            setTipo('Receita')
         } catch (error) {
             console.log(error)
         } finally {
@@ -72,6 +91,13 @@ export default function Movimentacoes() {
     return (
         <div className='pagina-mov'>
             <CabecalhoUsuario />
+
+            {
+                adicionado &&
+                    <div className='msg-adicionado'>
+                        <p>Nova Movimentação adicionada com sucesso!</p>
+                    </div>
+            }
 
             <div className='formulario'>
                 <div className='titulo'>
@@ -92,7 +118,7 @@ export default function Movimentacoes() {
                                     setTituloVazio(false)
                                 }} 
                             />
-                            { tituloVazio && <p className='msg-erro'>Preencha esse campo!</p> }
+                            { tituloVazio && <p className='msg-erro'>Esse campo é obrigatório!</p> }
                         </div>
 
                         <div className='campo'>
@@ -116,7 +142,7 @@ export default function Movimentacoes() {
                                     setValorVazio(false)
                                 }} 
                             />
-                            { valorVazio && <p className='msg-erro'>Preencha esse campo!</p> }
+                            { valorVazio && <p className='msg-erro'>Esse campo é obrigatório!</p> }
                         </div>
                     </div>
 
@@ -124,7 +150,7 @@ export default function Movimentacoes() {
                         <div className={`campo ${dataVazia ? 'erro' : ''}`}>
                             <p>Data:</p>
                             <input type="date" className='data' value={data} onChange={e => setData(e.target.value)}/>
-                            { dataVazia && <p className='msg-erro'>Preencha esse campo!</p> }
+                            { dataVazia && <p className='msg-erro'>Esse campo é obrigatório!</p> }
                         </div>
 
                         <div className='campo'>

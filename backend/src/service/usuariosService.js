@@ -19,9 +19,13 @@ export async function consultarUsuarioService(id) {
 }
 
 export async function alterarUsuarioService(usu, id) {
+    let linhasAfetadas = await db.alterarUsuario(usu, id)
 
+    return linhasAfetadas
 }
 
 export async function deletarUsuarioService(id) {
+    let linhasAfetadas = await db.deletarUsuario(id)
 
+    return linhasAfetadas
 }

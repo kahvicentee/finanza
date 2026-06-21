@@ -1,5 +1,5 @@
 import * as service from '../service/usuariosService.js'
-import { gerarToken } from '../utils/jwt.js'
+import { gerarToken, autenticacao } from '../utils/jwt.js'
 import { Router } from 'express'
 const endpoints = Router()
 
@@ -46,9 +46,9 @@ endpoints.post('/usuario/entrar', async (req, resp) => {
     }
 })
 
-endpoints.get('/usuario/:id', async (req, resp) => {
+endpoints.get('/usuario', autenticacao, async (req, resp) => {
     try {
-        let id = req.params.id
+        let id = req.user.id_usuario
         let registro = await service.consultarUsuarioService(id)
 
         resp.send(registro)
@@ -59,9 +59,16 @@ endpoints.get('/usuario/:id', async (req, resp) => {
     }
 })
 
-endpoints.put('/usuario/:id', async (req, resp) => {
+endpoints.put('/usuario', autenticacao, async (req, resp) => {
     try {
-        let id = req.params.id
+        let id = req.user.id_usuario
+        let usu = req.body
+
+        let linhasAfetadas = await service.alterarUsuarioService(usu, id)
+
+        resp.send({
+            linhasAfetadas
+        })
         
     } catch (error) {
         resp.status(400).send({
@@ -70,9 +77,15 @@ endpoints.put('/usuario/:id', async (req, resp) => {
     }
 })
 
-endpoints.delete('/usuario/:id', async (req, resp) => {
+endpoints.delete('/usuario', autenticacao, async (req, resp) => {
     try {
-        let id = req.params.id
+        let id = req.user.id_usuario
+
+        let linhasAfetadas = await service.deletarUsuarioService(id)
+
+        resp.send({
+            
+        })
         
     } catch (error) {
         resp.status(400).send({

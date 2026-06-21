@@ -74,5 +74,8 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 * Criação das telas de Movimentação (Adicionar e Consultar);
 * Implementação dos endpoints das movimentações.
 
+### Dia 4 
+* Continuando a implementação dos endpoints de usuários e movimentações.
+
 ## Licença
 Este projeto foi desenvolvido para fins de estudo e prática de desenvolvimento Backend.

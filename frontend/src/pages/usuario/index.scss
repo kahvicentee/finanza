@@ -3,11 +3,25 @@
     color: var(--branco);
     min-height: 100vh;
 
+    .ola {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 25px 0px 15px 0px;
+        align-items: center;
+
+        .linha {
+            background-color: var(--branco);
+            width: 50%;
+            height: 1px;
+        }
+    }
+
     .dados {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
-        width: min(100%, 1000px);
+        width: min(100%, 900px);
         margin: 20px auto;
 
         .dado {
@@ -39,14 +53,31 @@
             }
         }
 
-        .botao {
-            background-color: var(--azul);
-            color: var(--branco);
-            font-size: 18px;
-            border-radius: 5px;
-            border: none;
-            padding: 8px;
-            cursor: pointer;
+        .botoes {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            .botao, .botao-apagar {
+                background-color: var(--azul);
+                color: var(--branco);
+                width: 250px;
+                font-size: 18px;
+                border-radius: 5px;
+                border: none;
+                padding: 8px;
+                cursor: pointer;
+            }
+
+            .botao-apagar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                background-color: var(--vermelho);
+            }
         }
     }
 }

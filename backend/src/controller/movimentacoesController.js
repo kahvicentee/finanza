@@ -7,12 +7,17 @@ endpoints.post('/movimentacao', autenticacao, async (req, resp) => {
     try {
         let mov = req.body
         let usu = req.user.id_usuario
-        let id = await service.adicionarMovimentacaoService(mov, usu)
+        let linhasAfetadas = await service.adicionarMovimentacaoService(mov, usu)
 
-        resp.send({
-            mensagem: "Movimentação adicionada com sucesso!",
-            novoId: id
-        })
+        if (linhasAfetadas >= 1) {
+            resp.send({
+                mensagem: "Movimentação adicionada com sucesso!"
+            })
+        } else {
+            resp.send({
+                erro: "Nenhum registro pôde ser adicionado!"
+            })
+        }
     } catch (error) {
         resp.status(400).send({
             erro: error.message

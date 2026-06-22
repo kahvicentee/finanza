@@ -31,18 +31,30 @@ O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Fu
 
 ## ⚙️ Funcionalidades
 ### Usuários
-- Cadastro e Login de usuários
-- Validação de formulário
-- Criptografia de senhas
-- Autenticação por token
+* Cadastro e Login de usuários
+* Validação de formulário
+* Criptografia de senhas
+* Autenticação por token
 
 ### Financeiro
-- Cadastro de movimentações
-- Listagem de movimentações
-- Controle de receitas e despesas
-- Cálculo automático de saldo
+* Cadastro de movimentações
+* Listagem de movimentações
+* Controle de receitas e despesas
+* Cálculo automático de saldo
 
 ## 📸 Imagens do Projeto
+### Tela de Login
+
+### Tela de Cadastro
+
+### Tela de Movimentações
+
+### Tela de Consulta
+
+### Tela de Gráficos
+
+### Tela das Informações do Usuário
+
 
 ## 📚 Aprendizados
 Durante o desenvolvimento deste projeto foram praticados conceitos como:
@@ -74,8 +86,8 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 * Criação das telas de Movimentação (Adicionar e Consultar);
 * Implementação dos endpoints das movimentações.
 
-### Dia 4 
+### Dia 4 e 5
 * Continuando a implementação dos endpoints de usuários e movimentações.
 
-## Licença
+## 📄 Licença
 Este projeto foi desenvolvido para fins de estudo e prática de desenvolvimento Backend.

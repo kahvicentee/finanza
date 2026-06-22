@@ -31,4 +31,52 @@
             }
         }
     }
+
+    .filtros {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        select {
+            cursor: pointer;
+            width: 25%;
+            font-size: 18px;
+            color: var(--branco);
+            padding: 8px;
+            outline: none;
+            background-color: var(--preto);
+            border: 1px var(--cinza) solid;
+            border-radius: 8px;
+        }
+    }
+
+    .movimentacoes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pagina-historico {
+        .barra {
+            flex-direction: column;
+            gap: 15px;
+
+            h1 {
+                font-size: 35px;
+            }
+        }
+
+        .filtros {
+            flex-direction: column;
+            gap: 8px;
+
+            select {
+                width: 70%;
+                padding: 5px;
+            }
+        }
+    }
 }

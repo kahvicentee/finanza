@@ -56,6 +56,7 @@ export default function Movimentacoes() {
             }
 
             const token = localStorage.getItem('USUARIO')
+            
             await axios.post(
                 'http://localhost:5030/movimentacao',
                 paramCorpo,

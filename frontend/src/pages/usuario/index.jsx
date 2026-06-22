@@ -153,7 +153,7 @@ export default function Usuario() {
 
                     <button className='botao-apagar'>
                         <i className='fa-regular fa-trash-can'></i>
-                        Apagar
+                        Excluir
                     </button>
                 </div>
             </div>

@@ -13,15 +13,17 @@ export async function consultarMovimentacoesService(idUsuario) {
 }
 
 export async function consultarMovimentacoesPorTituloService(idUsuario, tit) {
-    let registros = await db.consultarMovimentacoesPorTituloService(idUsuario, tit)
+    let registros = await db.consultarMovimentacoesPorTitulo(idUsuario, tit)
 
     return registros
 }
 
-export async function alterarMovimentacaoService(mov, id) {
-    
+export async function alterarMovimentacaoService(mov, idUsuario, id) {
+    let linhasAfetadas = await db.alterarMovimentacao(mov, idUsuario, id)
+
+    return linhasAfetadas
 }
 
-export async function deletarMovimentacaoService(id) {
+export async function deletarMovimentacaoService(idUsuario, id) {
 
 }

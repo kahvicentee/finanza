@@ -19,7 +19,7 @@ export default function CabecalhoUsuario() {
     return (
         <div className='comp-cab-usu'>
             <div className='titulo'>
-                <h1>FINANZA</h1>
+                <Link to='/' className='finanza'>FINANZA</Link>
                 <i className="fa-solid fa-bars menu-bar" onClick={alterarMenu}></i>
             </div>
 
@@ -32,18 +32,28 @@ export default function CabecalhoUsuario() {
 
                         <div className='botoes'>
                             <Link to='/movimentacoes' className='botao'>
-                                <i class="fa-regular fa-square-plus icone"></i>
+                                <i className="fa-regular fa-square-plus icone"></i>
                                 <p>Adicionar Movimentação</p>
                             </Link>
 
                             <Link to='/historico' className='botao'>
-                                <i class="fa-regular fa-clock icone"></i>
+                                <i className="fa-regular fa-clock icone"></i>
                                 <p>Histórico</p>
                             </Link>
 
-                            <Link to='/graficos' className='botao'>
-                                <i class="fa-solid fa-chart-column icone"></i>
-                                <p>Gráficos</p>
+                            <Link to='/dashboard' className='botao'>
+                                <i className="fa-solid fa-chart-pie icone"></i>
+                                <p>Dashboard Financeiro</p>
+                            </Link>
+
+                            <Link to='/gerar-grafico' className='botao'>
+                                <i className="fa-solid fa-chart-column icone"></i>
+                                <p>Gerar Gráfico</p>
+                            </Link>
+
+                            <Link to='/planilhas' className='botao'>
+                                <i className="fa-regular fa-file-excel icone"></i>
+                                <p>Planilhas</p>
                             </Link>
                         </div>
 
@@ -54,7 +64,7 @@ export default function CabecalhoUsuario() {
                             </Link>
 
                             <button onClick={sair} className='botao sair'>
-                                <i class="fa-solid fa-arrow-right-to-bracket icone"></i>
+                                <i className="fa-solid fa-arrow-right-to-bracket icone"></i>
                                 <p>Sair</p>
                             </button>
                         </div>

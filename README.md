@@ -12,6 +12,7 @@ O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Fu
 ### Frontend
 * React.js
 * React Router DOM
+* React-google-chart (Gráficos)
 * Axios
 * SASS
 
@@ -19,6 +20,7 @@ O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Fu
 * Node.js
 * Express.js
 * JWT (Autenticação)
+* Bycript (Envia senha criptografada para o Banco)
 
 ### Banco de Dados
 * MySQL
@@ -88,6 +90,22 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 
 ### Dia 4 e 5
 * Continuando a implementação dos endpoints de usuários e movimentações.
+
+### Dia 6
+* CRUD da tabela de usuários finalizado;
+* Páginas relacionadas ao usuário (Login, Cadastro e Minha Conta) finalizadas;
+* CRUD da tabela de movimentações finalizado.
+
+### Dia 7
+* Implementanto biblioteca react-google-charts para geração de Gráficos;
+* Criação de endpoints para buscar as informações dos Gráficos;
+* Ajustando responsividade em algumas partes que não estavam responsivas;
+* Finalizando a identidade visual do site (ajustando textos e fontes).
+
+### Dia 8
+* Implementação biblioteca bycript para criptografar senha no Banco de Dados;
+* Implementando lógica para geração de Gráfico Personalizado;
+* 
 
 ## 📄 Licença
 Este projeto foi desenvolvido para fins de estudo e prática de desenvolvimento Backend.

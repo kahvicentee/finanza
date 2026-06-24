@@ -21,16 +21,16 @@
             gap: 5px;
 
             h1 {
-                font-size: 35px;
+                font-size: 28px;
             }
 
             p {
-                font-size: 18px;
+                font-size: 15px;
             }
 
             .cat {
                 margin-top: 15px;
-                font-size: 22px;
+                font-size: 20px;
             }
         }
 
@@ -40,11 +40,11 @@
             gap: 15px;
 
             .seta {
-                font-size: 30px;
+                font-size: 28px;
             }
 
             h1 {
-                font-size: 35px;
+                font-size: 30px;
             }
         }
 
@@ -75,7 +75,7 @@
                 width: 100px;
                 gap: 8px;
                 padding: 8px;
-                font-size: 17px;
+                font-size: 15px;
                 cursor: pointer;
                 border-radius: 5px;
             }
@@ -96,12 +96,13 @@
         .datas {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 18px;
 
             .data {
                 display: flex;
                 align-items: center;
                 gap: 5px;
+                font-size: 14px;
             }
         }
     }

@@ -19,8 +19,8 @@ export async function alterarMovimentacao(mov, idUsuario, id) {
                 ds_descricao = ?,
                 ds_categoria = ?,
                 ds_tipo = ?,
-                vl_total = ?
-                dt_movimentacao = ?, 
+                vl_total = ?,
+                dt_movimentacao = ?
             WHERE id_usuario = ? AND id_movimentacao = ?
     `
 
@@ -35,62 +35,68 @@ export async function deletarMovimentacao(idUsuario, id) {
         DELETE FROM tb_movimentacoes
             WHERE id_usuario = ? AND id_movimentacao = ?
     `
+
+    let resultado = await con.query(comando, [idUsuario, id])
+    return resultado
 }
 
-export async function consultarMovimentacoes(idUsuario) {
-    const comando = `
+export async function consultarMovimentacoes(idUsuario, titulo, categoria, tipo, periodo) {
+    let comando = `
         SELECT * FROM tb_movimentacoes
             WHERE id_usuario = ?
     `
 
-    let registros = await con.query(comando, [idUsuario])
+    let parametros = [idUsuario]
+
+    if (titulo) {
+        comando += ' AND ds_titulo LIKE ?'
+        parametros.push(`%${titulo}%`)
+    }
+    if (categoria) {
+        comando += ' AND ds_categoria = ?'
+        parametros.push(categoria)
+    }
+    if (tipo) {
+        comando += ' AND ds_tipo = ?'
+        parametros.push(tipo)
+    }
+    if (periodo === 'Hoje') {
+        comando += `
+            AND DATE(dt_movimentacao) = CURDATE()
+        `
+    }
+    if (periodo === 'Essa semana') {
+        comando += `
+            AND dt_movimentacao >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        `
+    }
+    if (periodo === 'Esse mês') {
+        comando += `
+            AND MONTH(dt_movimentacao) = MONTH(CURDATE())
+            AND YEAR(dt_movimentacao) = YEAR(CURDATE())
+        `
+    }
+    if (periodo === 'Mês passado') {
+        comando += `
+            AND MONTH(dt_movimentacao) = MONTH(CURDATE() - INTERVAL 1 MONTH)
+            AND YEAR(dt_movimentacao) = YEAR(CURDATE() - INTERVAL 1 MONTH)
+        `
+    }
+
+    comando += `
+        ORDER BY dt_movimentacao DESC
+    `
+
+    const registros = await con.query(comando, parametros)
     return registros[0]
 }
 
-export async function consultarMovimentacoesPorData(idUsuario, data) {
+export async function consultarMovimentacaoPorId(idUsuario, id) {
     const comando = `
         SELECT * FROM tb_movimentacoes
-            WHERE id_usuario = ? AND dt_movimentacao = ?
+            WHERE id_usuario = ? AND id_movimentacao = ?
     `
 
-    let registros = await con.query(comando, [idUsuario, data])
+    const [registros] = await con.query(comando, [idUsuario, id])
     return registros[0]
-}
-
-export async function consultarMovimentacoesPorTitulo(idUsuario, tit) {
-    const comando = `
-        SELECT * FROM tb_movimentacoes 
-            WHERE id_usuario = ? AND ds_titulo = ?
-    `
-
-    let registros = await con.query(comando, [idUsuario, tit])
-    return registros[0]
-}
-
-export async function consultarMovimentacoesPorCategoria(idUsuario, cat) {
-    const comando = `
-        SELECT * FROM tb_movimentacoes
-            WHERE id_usuario = ? AND ds_categoria = ?
-    `
-
-    let registros = await con.query(comando, [idUsuario, cat])
-    return registros[0]
-}
-
-export async function consultarMovimentacoesPorTipo(idUsuario, tipo) {
-    const comando = `
-        SELECT * FROM tb_movimentacoes
-            WHERE id_usuario = ? AND ds_tipo = ?
-    `
-
-    let registros = await con.query(comando, [idUsuario, tipo])
-    return registros[0]
-}
-
-export async function buscarSaldoTotal(idUsuario) {
-    const comando = `
-    
-    `
-
-    let registros = await con.query(comando, [idUsuario])
 }

@@ -1,0 +1,49 @@
+.pagina-dashboard {
+    background-color: var(--preto);
+    color: var(--branco);
+    min-height: 100vh;
+
+    .tit {
+        padding: 20px 25px;
+    }
+
+    .cards-dashboard {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 15px 0px 35px 0px;
+    }
+
+    .graficos {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .sem-dados {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 35px 0px;
+
+        p {
+            font-size: 20px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .pagina-dashboard {
+        .tit {
+            text-align: center;
+        }
+
+        .cards-dashboard {
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            padding: 10px 0px 35px 0px;
+        }
+    }
+}

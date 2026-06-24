@@ -82,9 +82,8 @@ endpoints.delete('/usuario', autenticacao, async (req, resp) => {
         let id = req.user.id_usuario
 
         let linhasAfetadas = await service.deletarUsuarioService(id)
-
         resp.send({
-            
+            linhasAfetadas
         })
         
     } catch (error) {

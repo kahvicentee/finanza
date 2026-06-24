@@ -1,10 +1,12 @@
 import './index.scss'
 import CabecalhoUsuario from '../../components/cabecalhoUsuario'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Movimentacoes() {
+    const { id } = useParams()
+
     const [titulo, setTitulo] = useState('')
     const [descricao, setDescricao] = useState('')
     const [valor, setValor] = useState('')
@@ -81,6 +83,75 @@ export default function Movimentacoes() {
         }
     }
 
+    async function alterarMovimentacao() {
+        if(!verificacao()) return
+
+        setCarregando(true)
+
+        try {
+            const paramCorpo = {
+                titulo,
+                descricao,
+                categoria,
+                tipo,
+                valor,
+                data
+            }
+
+            const token = localStorage.getItem('USUARIO')
+
+            await axios.put(
+                `http://localhost:5030/movimentacao/${id}`,
+                paramCorpo,
+                {
+                    headers: {
+                        'x-access-token': token
+                    }
+                }
+            )
+
+            navigate('/historico')
+        } catch (error) {
+            console.log(error.message)
+        } finally {
+            setCarregando(false)
+        }
+    }
+
+    async function salvarMovimentacao() {
+        if (id) {
+            await alterarMovimentacao()
+        } else {
+            await adicionarMovimentacao()
+        }
+    }
+
+    const carregarMovimentacao = useCallback(async () => {
+        try {
+            const token = localStorage.getItem('USUARIO')
+
+            const resp = await axios.get(
+                `http://localhost:5030/movimentacao/${id}`,
+                {
+                    headers: {
+                        'x-access-token': token
+                    }
+                }
+            )
+
+            const mov = resp.data
+
+            setTitulo(mov.ds_titulo)
+            setDescricao(mov.ds_descricao)
+            setCategoria(mov.ds_categoria)
+            setTipo(mov.ds_tipo)
+            setValor(mov.vl_total)
+            setData(mov.dt_movimentacao?.substring(0, 10))
+        } catch (error) {
+            console.log(error.message)
+        }
+    }, [id])
+
     useEffect(() => {
         const token = localStorage.getItem('USUARIO')
 
@@ -88,6 +159,12 @@ export default function Movimentacoes() {
             navigate('/')
         }
     }, [navigate])
+
+    useEffect(() => {
+        if (id) {
+            carregarMovimentacao()
+        }
+    }, [id, carregarMovimentacao])
 
     return (
         <div className='pagina-mov'>
@@ -102,7 +179,7 @@ export default function Movimentacoes() {
 
             <div className='formulario'>
                 <div className='titulo'>
-                    <h1>Nova Movimentação</h1>
+                    <h1>{id ? 'Editar Movimentação' : 'Nova Movimentação'}</h1>
                 </div>
 
                 <div className='linha'></div>
@@ -110,7 +187,7 @@ export default function Movimentacoes() {
                 <div className='campos'>
                     <div className='campos-1'>
                         <div className={`campo ${tituloVazio ? 'erro' : ''}`}>
-                            <p>Título:</p>
+                            <p>Título: <span>*</span></p>
                             <input 
                                 type="text" 
                                 value={titulo} 
@@ -131,7 +208,7 @@ export default function Movimentacoes() {
                         </div>
 
                         <div className={`campo ${tituloVazio ? 'erro' : ''}`}>
-                            <p>Valor:</p>
+                            <p>Valor: <span>*</span></p>
                             <input 
                                 type="number"
                                 step="0.01"
@@ -149,7 +226,7 @@ export default function Movimentacoes() {
 
                     <div className='campos-2'>
                         <div className={`campo ${dataVazia ? 'erro' : ''}`}>
-                            <p>Data:</p>
+                            <p>Data: <span>*</span></p>
                             <input type="date" className='data' value={data} onChange={e => setData(e.target.value)}/>
                             { dataVazia && <p className='msg-erro'>Esse campo é obrigatório!</p> }
                         </div>
@@ -179,8 +256,12 @@ export default function Movimentacoes() {
                     </div>
                 </div>
 
-                <button disabled={carregando} onClick={adicionarMovimentacao}>
-                    {carregando ? 'Adicionando...' : 'Adicionar'}
+                <button disabled={carregando} onClick={salvarMovimentacao}>
+                    {
+                        carregando
+                            ? (id ? 'Alterando...' : 'Adicionando...')
+                            : (id ? 'Alterar' : 'Adicionar')
+                    }
                 </button>
             </div>
         </div>

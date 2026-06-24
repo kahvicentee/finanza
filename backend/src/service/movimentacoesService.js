@@ -6,14 +6,14 @@ export async function adicionarMovimentacaoService(mov, idUsuario) {
     return id
 }
 
-export async function consultarMovimentacoesService(idUsuario) {
-    let registros = await db.consultarMovimentacoes(idUsuario)
+export async function consultarMovimentacoesService(idUsuario, titulo, categoria, tipo, periodo) {
+    let registros = await db.consultarMovimentacoes(idUsuario, titulo, categoria, tipo, periodo)
 
     return registros
 }
 
-export async function consultarMovimentacoesPorTituloService(idUsuario, tit) {
-    let registros = await db.consultarMovimentacoesPorTitulo(idUsuario, tit)
+export async function consultarMovimentacaoPorIdService(idUsuario, id) {
+    let registros = await db.consultarMovimentacaoPorId(idUsuario, id)
 
     return registros
 }
@@ -25,5 +25,7 @@ export async function alterarMovimentacaoService(mov, idUsuario, id) {
 }
 
 export async function deletarMovimentacaoService(idUsuario, id) {
+    let resultado = await db.deletarMovimentacao(idUsuario, id)
 
+    return resultado
 }

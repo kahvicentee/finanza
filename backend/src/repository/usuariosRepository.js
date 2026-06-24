@@ -37,20 +37,37 @@ export async function consultarUsuario(id) {
 }
 
 export async function alterarUsuario(usu, id) {
-    const comando = `
+    let comando = `
         UPDATE tb_usuarios
             SET ds_nome = ?,
                 ds_sobrenome = ?,
                 dt_nascimento = ?,
-                ds_email = ?,
-                ds_senha = ?
-            WHERE id_usuario = ?
+                ds_email = ?
     `
 
-    let registros = await con.query(comando, [usu.nome, usu.sobrenome, usu.nascimento, usu.email, usu.senha, id])
-    let info = registros[0]
+    let parametros = [
+        usu.nome,
+        usu.sobrenome,
+        usu.nascimento,
+        usu.email
+    ]
 
-    return info.affectedRows
+    if (usu.senha) {
+        comando += `,
+            ds_senha = ?
+        `
+
+        parametros.push(usu.senha)
+    }
+
+    comando += `
+        WHERE id_usuario = ?
+    `
+
+    parametros.push(id)
+
+    const [resultado] = await con.query(comando, parametros)
+    return resultado.affectedRows
 }
 
 export async function deletarUsuario(id) {
@@ -59,8 +76,16 @@ export async function deletarUsuario(id) {
             WHERE id_usuario = ?
     `
 
-    let registros = await con.query(comando, [id])
-    let info = registros[0]
+    let [resultado] = await con.query(comando, [id])
+    return resultado.affectedRows
+}
 
-    return info.affectedRows
+export async function deletarMovimentacoesUsuario(idUsuario) {
+    const comando = `
+        DELETE FROM tb_movimentacoes
+            WHERE id_usuario = ?
+    `
+
+    const [resultado] = await con.query(comando, [idUsuario])
+    return resultado.affectedRows
 }

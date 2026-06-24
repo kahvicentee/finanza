@@ -33,7 +33,7 @@ export default function Cadastro() {
             setNomeVazio(true)
             valido = false
         }
-        if (sobrenome === '') {
+        if (sobrenome.trim() === '') {
             setSobrenomeVazio(true)
             valido = false
         }
@@ -57,7 +57,7 @@ export default function Cadastro() {
             setSenDif(true)
             valido = false
         }
-        if(senha.trim().length() < 6) {
+        if(senha.length < 6) {
             setSenhaInvalida(true)
             valido = false
         }
@@ -186,7 +186,7 @@ export default function Cadastro() {
                     </div>
 
                     <div className={`campo ${emailVazio ? 'erro' : ''}`}>
-                        <p>Email: </p>
+                        <p>Email:</p>
                         <input 
                             type="text" 
                             value={email} 
@@ -204,7 +204,7 @@ export default function Cadastro() {
                     </div>
 
                     <div className={`campo ${senhaVazia ? 'erro' : ''}`}>
-                        <p>Senha: </p>
+                        <p>Senha:</p>
                         <input 
                             type="password" 
                             value={senha} 

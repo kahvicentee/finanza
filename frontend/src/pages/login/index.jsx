@@ -40,7 +40,6 @@ export default function Login() {
                 let resp = await axios.post(url, paramCorpo)
 
                 if (resp.data.erro !== undefined) {
-                    alert(resp.data.erro)
                     setNaoEncontrado(true)
                 } else {
                     localStorage.setItem('USUARIO', resp.data.token)
@@ -48,7 +47,6 @@ export default function Login() {
                 }
             }
         } catch (error) {
-            alert('Erro ')
             console.log(error)
             setNaoEncontrado(true)
         } finally {

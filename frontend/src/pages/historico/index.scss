@@ -24,7 +24,7 @@
 
             input {
                 outline: none;
-                font-size: 18px;
+                font-size: 16px;
                 border: none;
                 background-color: transparent;
                 color: var(--branco);
@@ -40,7 +40,7 @@
         select {
             cursor: pointer;
             width: 25%;
-            font-size: 18px;
+            font-size: 15px;
             color: var(--branco);
             padding: 8px;
             outline: none;
@@ -54,7 +54,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
         padding: 25px 0px;
+    }
+
+    .mensagem {
+        padding: 40px 0px;
+        
+        h2 {
+            text-align: center;
+        }
     }
 }
 

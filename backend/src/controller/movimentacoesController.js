@@ -29,8 +29,22 @@ endpoints.get('/movimentacao', autenticacao, async (req, resp) => {
     try {
         let usu = req.user.id_usuario
 
+        let titulo = req.query.titulo
+        let categoria = req.query.categoria
+        let tipo = req.query.tipo
+        let periodo = req.query.periodo
+
         let registros = await service.consultarMovimentacoesService(usu)
 
+        const resposta = await service.consultarMovimentacoesService(
+            usu,
+            titulo,
+            categoria,
+            tipo,
+            periodo
+        )
+
+        resp.send(resposta)
     } catch (error) {
         resp.status(400).send({
             erro: error.message
@@ -38,14 +52,14 @@ endpoints.get('/movimentacao', autenticacao, async (req, resp) => {
     }
 })
 
-endpoints.get('/movimentacao/:tit', autenticacao, async (req, resp) => {
+endpoints.get('/movimentacao/:id', autenticacao, async (req, resp) => {
     try {
         let usu = req.user.id_usuario
-        let tit = req.params.tit
+        let id = req.params.id
 
-        let registros = await service.consultarMovimentacoesPorTituloService(usu, tit)
+        let movimentacao = await service.consultarMovimentacaoPorIdService(usu, id)
 
-
+        resp.send(movimentacao)
     } catch (error) {
         resp.status(400).send({
             erro: error.message
@@ -53,14 +67,17 @@ endpoints.get('/movimentacao/:tit', autenticacao, async (req, resp) => {
     }
 })
 
-endpoints.put('/movimentacao', autenticacao, async (req, resp) => {
+endpoints.put('/movimentacao/:id', autenticacao, async (req, resp) => {
     try {
         let usu = req.user.id_usuario
         let mov = req.body
+        let id = req.params.id
 
-        let linhasAfetadas = await service.alterarMovimentacaoService(mov, usu)
+        let linhasAfetadas = await service.alterarMovimentacaoService(mov, usu, id)
 
-        
+        resp.send({
+            linhasAfetadas
+        })
         
     } catch (error) {
         resp.status(400).send({
@@ -69,11 +86,13 @@ endpoints.put('/movimentacao', autenticacao, async (req, resp) => {
     }
 })
 
-endpoints.delete('/movimentacao', autenticacao, async (req, resp) => {
+endpoints.delete('/movimentacao/:id', autenticacao, async (req, resp) => {
     try {
-        let usu = req.user.id_usuario
+        const usu = req.user.id_usuario
+        const mov = req.params.id
 
-
+        let resultado = await service.deletarMovimentacaoService(usu, mov)
+        resp.status(204).send()
     } catch (error) {
         resp.status(400).send({
             erro: error.message

@@ -24,8 +24,16 @@ export async function alterarUsuarioService(usu, id) {
     return linhasAfetadas
 }
 
-export async function deletarUsuarioService(id) {
-    let linhasAfetadas = await db.deletarUsuario(id)
+export async function deletarUsuarioService(idUsuario) {
+    // REMOVE TODAS AS MOVIMENTAÇÕES
+    await db.deletarMovimentacoesUsuario(idUsuario)
+
+    // REMOVE O USUÁRIO
+    const linhasAfetadas = await db.deletarUsuario(idUsuario)
+
+    if (linhasAfetadas === 0) {
+        throw new Error("Usuário não encontrado.")
+    }
 
     return linhasAfetadas
 }

@@ -1,7 +1,8 @@
 import './index.scss'
 import CabecalhoUsuario from '../../components/cabecalhoUsuario'
 import Movimentacao from '../../components/movimentacao'
-import { useState, useEffect } from 'react'
+import Confirmacao from '../../components/confirmacao'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -14,19 +15,88 @@ export default function Historico() {
     const [tipo, setTipo] = useState('')
     const [movimentacoes, setMovimentacoes] = useState([])
 
-    async function buscarMovimentacoes(token) {
-        
-    }   
+    const [mostrarConf, setMostrarConf] = useState(false)
+    const [movimentacaoSelecionada, setMovimentacaoSelecionada] = useState(null)
+
+    const buscarMovimentacoes = useCallback(async (token) => {
+        try {
+            const resp = await axios.get(
+                'http://localhost:5030/movimentacao',
+                {
+                    headers: {
+                        'x-access-token': token
+                    },
+                    params: {
+                        titulo,
+                        categoria,
+                        tipo,
+                        periodo: filtro
+                    }
+                }
+            )
+
+            setMovimentacoes(resp.data)
+        } catch (error) {
+            alert(error)
+        }
+    }, [titulo, categoria, tipo, filtro])
+
+    function formatarData(data) {
+        const d = new Date(data)
+
+        const dia = String(d.getDate()).padStart(2, '0')
+        const mes = String(d.getMonth() + 1).padStart(2, '0')
+        const ano = d.getFullYear()
+
+        return `${dia}/${mes}/${ano}`
+    }
+
+    function abrirConfirmacao(id) {
+        setMovimentacaoSelecionada(id)
+        setMostrarConf(true)
+    }
+
+    async function excluirMovimentacao(id) {
+        try {
+            const token = localStorage.getItem('USUARIO')
+
+            await axios.delete(
+                `http://localhost:5030/movimentacao/${id}`,
+                {
+                    headers: {
+                        'x-access-token': token
+                    }
+                }
+            )
+
+            setMostrarConf(false)
+            setMovimentacaoSelecionada(null)
+
+            buscarMovimentacoes(token)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    function alterarMovimentacao(id) {
+        navigate(`/movimentacoes/${id}`)
+    }
 
     useEffect(() => {
         const token = localStorage.getItem('USUARIO')
 
         if (!token) {
             navigate('/')
-        } else {
+        } 
+    }, [navigate])
+
+    useEffect(() => {
+        const token = localStorage.getItem('USUARIO')
+
+        if (token) {
             buscarMovimentacoes(token)
         }
-    }, [navigate])
+    }, [titulo, categoria, tipo, filtro, buscarMovimentacoes])
 
     return (
         <div className='pagina-historico'>
@@ -51,11 +121,12 @@ export default function Historico() {
                     value={filtro}
                     onChange={e => setFiltro(e.target.value)}
                 >
-                    <option value="">Hoje</option>
-                    <option value="">Últimos 7 dias</option>
-                    <option value="">Desse mês</option>
-                    <option value="">Mês passado</option>
-                    <option value="">Todas</option>
+                    <option value="">Selecione uma opção</option>
+                    <option value="Hoje">Hoje</option>
+                    <option value="Essa semana">Últimos 7 dias</option>
+                    <option value="Esse mês">Desse mês</option>
+                    <option value="Mês passado">Mês passado</option>
+                    <option value="Todas">Todas</option>
                 </select>
 
                 <select 
@@ -84,16 +155,46 @@ export default function Historico() {
                 </select>
             </div>
 
-            <div className='movimentacoes'>
-                <Movimentacao
-                    titulo="Salário Junho"
-                    descricao=""
-                    categoria="Salário"
-                    tipo="Receita"
-                    valor="2500"
-                    data="20/06/2026"
-                />
-            </div>
+            {
+                movimentacoes.length > 0 ? (
+                    <div className='movimentacoes'>
+                        {
+                            movimentacoes.map((item, pos) => (
+                                <Movimentacao 
+                                    key={pos}
+                                    id={item.id_movimentacao}
+                                    titulo={item.ds_titulo}
+                                    descricao={item.ds_descricao}
+                                    categoria={item.ds_categoria}
+                                    tipo={item.ds_tipo}
+                                    valor={item.vl_total}
+                                    data={formatarData(item.dt_movimentacao)}
+                                    criacao={formatarData(item.dt_criacao)}
+                                    onAlterar={alterarMovimentacao}
+                                    onExcluir={abrirConfirmacao}
+                                />
+                            ))
+                        }
+                    </div>
+                ) : (
+                    <div className='mensagem'>
+                        <h2>Nenhuma Movimentação encontrada!</h2>
+                    </div>
+                )
+            }
+
+            {
+                mostrarConf &&
+                    <Confirmacao 
+                        titulo="Excluir Movimentação"
+                        mensagem="Deseja excluir essa movimentação?"
+                        onCancelar={() => {
+                            setMostrarConf(false)
+                            setMovimentacaoSelecionada(null)
+                        }}
+                        onConfirmar={() => excluirMovimentacao(movimentacaoSelecionada)}
+                    />
+            }
         </div>
     )
 }

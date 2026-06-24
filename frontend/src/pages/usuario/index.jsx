@@ -1,5 +1,6 @@
 import './index.scss'
 import CabecalhoUsuario from '../../components/cabecalhoUsuario'
+import Confirmacao from '../../components/confirmacao'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -13,6 +14,8 @@ export default function Usuario() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [novaSenha, setNovaSenha] = useState('')
+
+    const [mostrarConf, setMostrarConf] = useState(false)
 
     async function buscarInfo(token) {
         const resp = await axios.get(
@@ -50,7 +53,7 @@ export default function Usuario() {
             }
 
             const token = localStorage.getItem('USUARIO')
-            const resp = await axios.put(
+            await axios.put(
                 'http://localhost:5030/usuario',
                 paramCorpo,
                 {
@@ -61,8 +64,28 @@ export default function Usuario() {
             )
             
             setAlterar(false)
+            setNovaSenha('')
         } catch (error) {
+            alert(error.response?.data?.erro || error.message)
+        }
+    }
 
+    async function excluirConta() {
+        try {
+            const token = localStorage.getItem('USUARIO')
+            await axios.delete(
+                'http://localhost:5030/usuario',
+                {
+                    headers: {
+                        'x-access-token': token
+                    }
+                }
+            )
+
+            localStorage.removeItem('USUARIO')
+            navigate('/')
+        } catch (error) {
+            alert(error.message)
         }
     }
 
@@ -151,12 +174,26 @@ export default function Usuario() {
                         {alterar ? 'Salvar Alterações' : 'Alterar'}
                     </button>
 
-                    <button className='botao-apagar'>
+                    <button 
+                        className='botao-apagar'
+                        value={mostrarConf}
+                        onClick={() => setMostrarConf(!mostrarConf)}
+                    >
                         <i className='fa-regular fa-trash-can'></i>
                         Excluir
                     </button>
                 </div>
             </div>
+
+            {
+                mostrarConf &&
+                    <Confirmacao 
+                        titulo="Tem certeza que deseja excluir sua conta?"
+                        mensagem="Todos os seus dados e movimentações serão removidos permanentemente. Essa ação não poderá ser desfeita."
+                        onCancelar={() => setMostrarConf(!mostrarConf)}
+                        onConfirmar={excluirConta}
+                    />
+            }
         </div>
     )
 }

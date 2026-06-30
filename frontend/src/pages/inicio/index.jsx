@@ -14,7 +14,7 @@ export default function Inicio() {
         <div className='pagina-inicio'>
             <Cabecalho />
 
-            <div className='bloco'>
+            <div className='bloco bloco-inicio'>
                 <div className='textos'>
                     <button className='frase'>CONTROLE FINANCEIRO INTELIGENTE</button>
                     <h1>Clareza para as <span>suas finanças</span></h1>
@@ -71,7 +71,7 @@ export default function Inicio() {
 
                 <div className='detalhes'>
                     <Card 
-                        icone=''
+                        icone='fa-solid fa-sitemap'
                         titulo='Controle'
                         descricao='Tenhas todas as suas finanças organizadas em um único lugar.'
                     />
@@ -83,13 +83,13 @@ export default function Inicio() {
                     />
 
                     <Card 
-                        icone=''
+                        icone='fa-solid fa-arrow-up-right-dots'
                         titulo='Planejamento'
                         descricao='Planeje seu futuro com metas e acompanhe seu progresso.'
                     />
 
                     <Card 
-                        icone=''
+                        icone='fa-solid fa-arrow-trend-up'
                         titulo='Evolução'
                         descricao='Acompanhe sua evolução financeira e conquiste seus objetivos.'
                     />

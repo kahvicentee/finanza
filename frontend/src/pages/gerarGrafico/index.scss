@@ -1,5 +1,113 @@
 .pagina-gerar-grafico {
     background-color: var(--preto);
+    color: var(--branco);
     min-height: 100vh;
     
+    .conteudo {
+        display: flex;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+
+    .card-filtros {
+        width: 100%;
+        max-width: 850px;
+        border-radius: 20px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .grupo-filtro {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .titulo {
+            font-size: 25px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 20px;
+        }
+    }
+
+    .opcoes-periodo {
+        display: flex;
+        gap: 24px;
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+
+            cursor: pointer;
+        }
+
+        input[type='radio'] {
+            cursor: pointer;
+            width: 18px;
+        }
+
+        input[type='radio']:focus {
+            box-shadow: none;
+        }
+    }
+
+    .linha {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    select, input {
+        flex: 1;
+        min-height: 45px;
+        padding: 0 15px;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        font-size: 18px;
+        outline: none;
+        transition: .2s;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    select:focus, input:focus {
+        box-shadow: 0 0 0 4px rgba(31, 142, 241, 0.12);
+    }
+
+    .filtro-tipo, .filtro-categoria {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .grupo-filtro:last-of-type {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .gerar {
+        height: 55px;
+        border: none;
+        border-radius: 14px;
+        background-color: #1f8ef1;
+        color: var(--branco);
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    .gerar:hover {
+        transform: translateY(-2px);
+        background-color: var(--azul);
+    }
 }

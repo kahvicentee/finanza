@@ -242,6 +242,7 @@ export default function Movimentacoes() {
                                 <option value="Saúde">Saúde</option>
                                 <option value="Investimentos">Investimentos</option>
                                 <option value="Lazer">Lazer</option>
+                                <option value="Compras">Compras</option>
                                 <option value="Outros">Outros</option>
                             </select>
                         </div>

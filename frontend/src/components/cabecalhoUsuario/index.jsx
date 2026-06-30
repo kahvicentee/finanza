@@ -42,7 +42,7 @@ export default function CabecalhoUsuario() {
                             </Link>
 
                             <Link to='/dashboard' className='botao'>
-                                <i className="fa-solid fa-chart-pie icone"></i>
+                                <i className="fa-solid fa-chart-line icone"></i>
                                 <p>Dashboard Financeiro</p>
                             </Link>
 

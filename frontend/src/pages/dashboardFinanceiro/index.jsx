@@ -54,9 +54,8 @@ export default function DashboardFinanceiro() {
     async function carregarDashboard() {
         try {
             const token = localStorage.getItem('USUARIO')
-
             const resp = await axios.get(
-                'http://localhost:5030/dashboard/resumo',
+                'http://localhost:5030/dashboard',
                 {
                     headers: {
                         'x-access-token': token
@@ -64,66 +63,29 @@ export default function DashboardFinanceiro() {
                 }
             )
 
-            setSaldo(resp.data.saldo)
-            setReceitas(resp.data.receitas)
-            setDespesas(resp.data.despesas)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
+            const dashboard = resp.data
+            setSaldo(dashboard.saldo)
+            setReceitas(dashboard.receitas)
+            setDespesas(dashboard.despesas)
 
-    async function carregarResumo() {
-        try {
-            const token = localStorage.getItem('USUARIO')
-
-            const resp = await axios.get(
-                'http://localhost:5030/grafico/resumo',
-                {
-                    headers: {
-                        'x-access-token': token
-                    }
-                }
-            )
-
-            const dados = [
+            setDadosResumo([
                 ['Tipo', 'Valor', {role: 'style'}],
-                ...resp.data.map(item => [
+                ...dashboard.graficoResumo.map(item => [
                     item.tipo,
                     Number(item.total),
                     item.tipo === 'Receita'
                         ? '#22c55e'
                         : '#ef4444'
                 ])
-            ]
+            ])
 
-            setDadosResumo(dados)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    async function carregarGrafico() {
-        try {
-            const token = localStorage.getItem('USUARIO')
-
-            const resp = await axios.get(
-                'http://localhost:5030/grafico/categoria',
-                {
-                    headers: {
-                        'x-access-token': token
-                    }
-                }
-            )
-
-            const dados = [
+            setDadosPizza([
                 ['Categoria', 'Valor'],
-                ...resp.data.map(item => [
+                ...dashboard.graficoCategoria.map(item => [
                     item.categoria,
                     Number(item.total)
                 ])
-            ]
-
-            setDadosPizza(dados)
+            ])
         } catch (error) {
             console.log(error.message)
         }
@@ -138,11 +100,13 @@ export default function DashboardFinanceiro() {
             '#ef4444', 
             '#f59e0b', 
             '#eab308', 
-            '#22c55e',
+            '#1fb958',
+            '#2bf174',
             '#06b6d4',
             '#3b82f6',
             '#8b5cf6',
-            '#ec4899'
+            '#ec4899',
+            '#9b9b9b'
         ],
         titleTextStyle: {
             color: '#ffffff',
@@ -191,8 +155,6 @@ export default function DashboardFinanceiro() {
         }
 
         carregarDashboard()
-        carregarResumo()
-        carregarGrafico()
     }, [navigate])
 
     return (
@@ -215,14 +177,14 @@ export default function DashboardFinanceiro() {
                     titulo='Receitas'
                     icone='fa-solid fa-arrow-up'
                     total={receitas.toFixed(2)}
-                    mensagem=''
+                    mensagem='Entrada total'
                 />
 
                 <CardResumo 
                     titulo='Despesas'
                     icone='fa-solid fa-arrow-down'
                     total={despesas.toFixed(2)}
-                    mensagem=''
+                    mensagem='Saída total'
                 />
             </div>
 

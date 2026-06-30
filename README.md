@@ -45,18 +45,26 @@ O projeto está sendo desenvolvido para praticar conceitos de desenvolvimento Fu
 * Cálculo automático de saldo
 
 ## 📸 Imagens do Projeto
-### Tela de Login
 
-### Tela de Cadastro
+<p align="center">
+  <img src="images/login.png" width="45%">
+  <img src="images/cadastro.png" width="45%">
+</p>
 
-### Tela de Movimentações
+<p align="center">
+  <img src="images/movimentacao.png" width="45%">
+  <img src="images/historico.png" width="45%">
+</p>
 
-### Tela de Consulta
+<p align="center">
+  <img src="images/dashboard.png" width="45%">
+  <img src="" width="45%">
+</p>
 
-### Tela de Gráficos
-
-### Tela das Informações do Usuário
-
+<p align="center">
+  <img src="">
+  <img src="images/usuario.png">
+</p>
 
 ## 📚 Aprendizados
 Durante o desenvolvimento deste projeto foram praticados conceitos como:
@@ -102,10 +110,14 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 * Ajustando responsividade em algumas partes que não estavam responsivas;
 * Finalizando a identidade visual do site (ajustando textos e fontes).
 
-### Dia 8
+### Dia 8 e Dia 9
 * Implementação biblioteca bycript para criptografar senha no Banco de Dados;
 * Implementando lógica para geração de Gráfico Personalizado;
-* 
+* Pesquisando e estudando sobre automação de planilhas com Python e outras bibliotecas.
+
+### Dia 10
+*
+
 
 ## 📄 Licença
 Este projeto foi desenvolvido para fins de estudo e prática de desenvolvimento Backend.

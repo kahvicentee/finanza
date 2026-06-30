@@ -58,9 +58,3 @@ export async function buscarResumoDashboard(idUsuario) {
     const [registros] = await con.query(comando, [idUsuario])
     return registros[0]
 }
-
-export async function buscarGraficoPersonalizado(idUsuario) {
-    const comando = `
-    
-    `
-}
